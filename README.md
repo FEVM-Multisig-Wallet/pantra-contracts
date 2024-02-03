@@ -1,6 +1,6 @@
 # Pantra Contracts
 
-Pantra Contracts is a set of Ethereum smart contracts designed to provide users with a savings wallet that accumulates ETH on every transaction. These contracts powers the Pantra Smart Wallet mobile App The project consists of three main components: `PantraSavingWallet`, `PantraWalletFactory`, and `PantraSmartWalletNFT`. The Enterprise mode has been enabled for the `PantraWalletFactory` and `PantraSmartWalletNFT` contracts to allow for gassless wallet creation and NFT minting.
+Pantra Contracts is a set of Lightlink smart contracts designed to provide users with a savings wallet that accumulates ETH on every transaction. These contracts powers the Pantra Smart Wallet mobile App. The contracts consists of three main components: `PantraSavingWallet`, `PantraWalletFactory`, and `PantraSmartWalletNFT`. The Enterprise mode has been enabled for the `PantraWalletFactory` and `PantraSmartWalletNFT` contracts to allow for gassless wallet creation and NFT minting.
 
 ## Contract Architecture
 
@@ -58,7 +58,7 @@ Pantra Contracts is a set of Ethereum smart contracts designed to provide users 
 
 ### Testing
 
-Run Truffle tests:
+Run Hardhat Tests:
 
 ```bash
 npx hardhat test
