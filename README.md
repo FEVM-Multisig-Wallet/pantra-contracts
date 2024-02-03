@@ -24,6 +24,16 @@ Pantra Contracts is a set of Ethereum smart contracts designed to provide users 
 - The NFT returns a `tokenURI` which contains an SVG representation of the user's wallet address and wallet balance from the associated `PantraSavingWallet`.
 - [Pegasus Deployment](https://pegasus.lightlink.io/address/0xF0c8355c1744532C1093f751847763191314992b)
 
+## Deployment Addresses
+
+### 1. PantraWalletFactory
+   * Pegasus - [0x84A7BB3e3210F3F38eeF88615492f066917eCA37](https://pegasus.lightlink.io/address/0x84A7BB3e3210F3F38eeF88615492f066917eCA37)
+   * Phoenix - Coming Soon
+
+### 2. PantraWalletNFT
+   * Pegasus - [0xF0c8355c1744532C1093f751847763191314992b](https://pegasus.lightlink.io/address/0xF0c8355c1744532C1093f751847763191314992b)
+   * Phoenix - Coming Soon
+
 ## Development
 
 ### Prerequisites
