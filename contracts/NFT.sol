@@ -20,25 +20,26 @@ contract PantraSmartWalletNFT is ERC721 {
         _;
     }
 
-    function generateSVG(address wallet) public view returns (string memory svg) {
+    function _generateSVG(address wallet, uint256 id) public view returns (string memory svg) {
         uint balance = IPantraSavingWallet(wallet).getBalance();
         string memory balanceToString = convertWEIToEtherString(balance);
         NFTSVG.SVGParams memory param = NFTSVG.SVGParams({
-            walletAddress: '0x5adaf849e40B5b1303507299D3d06a4663D3A8b8',
-            userAddress: '0x78E3a0Eb75016521E460D8efd62e08390B9736e7',
+            walletAddress: addressToString(wallet),
+            userAddress: addressToString(_ownerOf(id)),
             nftSymbol: symbol(),
             nftName: name(),
-            walletBalance: balanceToString,
-            color0: '#2b0fff',
-            color1: '#f09ad4',
-            color2: '#766abc',
-            color3: '',
-            x1: '600',
-            y1: '300',
-            x2: '600',
-            y2: '200',
-            x3: '500',
-            y3: '150'
+            walletBalance: balanceToString
+        });
+        svg = NFTSVG.generateSVG(param);
+    }
+
+    function _generateSVGNotMinted() public view returns (string memory svg)  {
+        NFTSVG.SVGParams memory param = NFTSVG.SVGParams({
+            walletAddress: '',
+            userAddress: '',
+            nftSymbol: symbol(),
+            nftName: name(),
+            walletBalance: ''
         });
         svg = NFTSVG.generateSVG(param);
     }
@@ -51,20 +52,35 @@ contract PantraSmartWalletNFT is ERC721 {
         bool minted = _ownerOf(id) != address(0);
 
         address walletAddress = address(uint160(id));
-        string memory walletBalance = "";
+        string memory _name = name();
+        string memory _desc = name();
+        string memory svg = "";
         if (minted) {
-        
-            IPantraSavingWallet wallet = IPantraSavingWallet(walletAddress);
-            walletBalance = string(
-                abi.encodePacked(
-                    unicode'<text x="20" y="305">Balance',
-                    convertWEIToEtherString(wallet.getBalance()),
-                    "</text>"
-                )
-            );
+            svg = _generateSVG(walletAddress, id);
+        } else {
+            svg = _generateSVGNotMinted();
         }
-
-        return walletBalance;
+        string memory image = Base64.encode(bytes(svg));
+        return string(
+            abi.encodePacked(
+                'data:application/json;base64,',
+                Base64.encode(
+                    bytes(
+                        abi.encodePacked(
+                            '{"name":"',
+                            _name, 
+                            '","description":"',
+                            _desc,
+                            '","image":"',
+                            'data:image/svg+xml;base64,',
+                            image,
+                            '"}'
+                        )
+                    )
+                )
+            )
+        );
+        //return svg;
     }
     
     /// @dev converts wei to ether string in two decimal places
@@ -78,6 +94,21 @@ contract PantraSmartWalletNFT is ERC721 {
                 Strings.toString(((finneyValue % 1000) % 100) / 10)
             )
         );
+    }
+    
+    /// @dev converts address to a string
+    function addressToString(address _address) internal pure returns (string memory) {
+        bytes32 value = bytes32(uint256(uint160(_address)));
+        bytes memory alphabet = "0123456789abcdef";
+
+        bytes memory str = new bytes(42);
+        str[0] = '0';
+        str[1] = 'x';
+        for (uint256 i = 0; i < 20; i++) {
+            str[2 + i * 2] = alphabet[uint8(value[i + 12] >> 4)];
+            str[3 + i * 2] = alphabet[uint8(value[i + 12] & 0x0f)];
+        }
+        return string(str);
     }
 }
 

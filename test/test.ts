@@ -16,7 +16,7 @@ describe("Pantra Savings Contract and Savings Factory Test", function () {
   let deployer: HardhatEthersSigner;
   let feeCollector: HardhatEthersSigner;
   let walletUser: HardhatEthersSigner;
-  const depositAmount = ethers.parseEther("1");
+  const depositAmount = ethers.parseEther("100");
   const withdrawalAmount = ethers.parseEther("0.1");
 
   const createHTML = (svg: string) => {
@@ -108,8 +108,8 @@ describe("Pantra Savings Contract and Savings Factory Test", function () {
   })
 
   it("Test NFT SVG", async () => {
-    const resp = await nftCollection.generateSVG(
-      await savingWallet.getAddress()
+    const resp = await nftCollection.tokenURI(
+      BigInt(await savingWallet.getAddress())
     );
 
     const html = createHTML(resp);
