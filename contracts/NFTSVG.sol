@@ -35,34 +35,7 @@ library NFTSVG {
             );
                 
     }
-
-    // function generateSVGDefs() private pure returns (string memory svg) {
-    //     svg = string(
-    //         abi.encodePacked(
-    //             '<svg width="290" height="500" viewBox="0 0 290 500" xmlns="http://www.w3.org/2000/svg"',
-    //             " xmlns:xlink='http://www.w3.org/1999/xlink'>",
-    //             '<rect x="0" y="0" width="290" height="500" rx="42" ry="42" fill="#111" />',
-    //             '<path d="M20 140C20 73.7258 73.7258 20 140 20H150C216.274 20 270 73.7258 270 140V252H20V140Z" fill="url(#paint0_angular_1681_99)"/>'
-    //             '<defs>',
-    //             '<path id="text-path-a" d="M40 12 H250 A28 28 0 0 1 278 40 V460 A28 28 0 0 1 250 488 H40 A28 28 0 0 1 12 460 V40 A28 28 0 0 1 40 12 z" />',
-    //             '<filter id="f1"><feImage result="p0" xlink:href="data:image/svg+xml;base64,',
-    //             Base64.encode(
-    //                 bytes(
-    //                     abi.encodePacked(
-    //                         '<radialGradient id="paint0_angular_1681_99" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(197.989 70.1923) rotate(43.8986) scale(94.908 192.313)">',
-    //                             '<stop stop-color="#7CCE7F"/>',
-    //                             '<stop offset="0.192244" stop-color="#FF6D4D"/>',
-    //                             '<stop offset="0.317708" stop-color="#84E9FF"/>',
-    //                             '<stop offset="0.510417" stop-color="#918FF4"/>',
-    //                         '</radialGradient>'
-    //                     )
-    //                 )
-    //             ),
-    //             '"/>',
-    //             '</defs>'
-    //         )
-    //     );
-    // }
+    
     function generateSVGDefs() private pure returns (string memory svg) {
         svg = string(
             abi.encodePacked(

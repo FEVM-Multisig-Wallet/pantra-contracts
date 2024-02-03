@@ -26,7 +26,7 @@ describe("Pantra Savings Contract and Savings Factory Test", function () {
         <title>SVG</title>
       </head>
       <body>
-        ${svg}
+        <img src='${svg}'/>
       </body>
     </html>
     `;
