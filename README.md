@@ -16,13 +16,13 @@ Pantra Contracts is a set of Ethereum smart contracts designed to provide users 
 
 - `PantraWalletFactory` is responsible for `PantraSavingWallet` creation for each user.
 - Users interacts with the `PantraSavingWallet` contract through the `PantraWalletFactory`.
-- Pegasus CA: `0x84A7BB3e3210F3F38eeF88615492f066917eCA37`
+- [Pegasus Deployment](https://pegasus.lightlink.io/address/0x84A7BB3e3210F3F38eeF88615492f066917eCA37)
 
-### 3. PantraNFT
+### 3. PantraSmartWalletNFT
 
 - `PantraSmartWalletNFT` is an NFT (Non-Fungible Token) that gets minted by the `PantraWalletFactory` on the user's first deposit into the savings wallet.
 - The NFT returns a `tokenURI` which contains an SVG representation of the user's wallet address and wallet balance from the associated `PantraSavingWallet`.
-- Pegasus CA: `0x5B785e6ae1502e1ea75771C34e118a34413A6D89`
+- [Pegasus Deployment](https://pegasus.lightlink.io/address/0xF0c8355c1744532C1093f751847763191314992b)
 
 ## Development
 
