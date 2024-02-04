@@ -1,6 +1,6 @@
 import { HardhatUserConfig } from "hardhat/config";
-import "@nomicfoundation/hardhat-toolbox";
-//import "@nomicfoundation/hardhat-verify";
+//import "@nomicfoundation/hardhat-toolbox";
+import "@nomiclabs/hardhat-etherscan";
 import { config as envConfig } from "dotenv";
 
 envConfig();
@@ -15,11 +15,27 @@ const config: HardhatUserConfig = {
       url: process.env.PHEONIX_MAINNET_RPC_URL,
       accounts: [String(PRIVATE_KEY)],
     },
-    testnet: {
+    pegasus: {
       url: process.env.PEGASUS_TESTNET_RPC_URL,
       accounts: [String(PRIVATE_KEY)],
     },
   },
+  etherscan: {
+    apiKey: {
+      goerli: String(process.env.GOERLI_ETHERSCAN_API_KEY),
+      pegasus: String(process.env.PEGASUS_BLOCKSCOUT_API_KEY)
+    },
+    customChains: [
+      {
+        network: "pegasus",
+        chainId: 1891,
+        urls: {
+          apiURL: "https://pegasus.lightlink.io/api",
+          browserURL: "https://pegasus.lightlink.io"
+        }
+      }
+    ]
+  }
 };
 
 export default config;
