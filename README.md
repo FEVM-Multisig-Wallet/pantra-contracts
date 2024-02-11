@@ -16,7 +16,7 @@ Pantra Contracts is a set of Lightlink smart contracts designed to provide users
 
 - `PantraWalletFactory` is responsible for `PantraSavingWallet` creation for each user.
 - Users interacts with the `PantraSavingWallet` contract through the `PantraWalletFactory`.
-- [Pegasus Deployment](https://pegasus.lightlink.io/address/0x84A7BB3e3210F3F38eeF88615492f066917eCA37)
+- [Pegasus Deployment](https://pegasus.lightlink.io/address/0x86001e93Be963522Ad8f58A067801A9d0f3af037)
 
 ### 3. PantraSmartWalletNFT
 

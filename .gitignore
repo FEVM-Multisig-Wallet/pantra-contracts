@@ -16,3 +16,6 @@ node_modules
 # others
 *-flat.sol
 *.html
+
+# Intellij
+.idea/
