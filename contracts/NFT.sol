@@ -45,7 +45,10 @@ contract PantraSmartWalletNFT is ERC721 {
     }
 
     function mintItem(address walletAddress, address owner) public onlyAdmin {
-        _safeMint(owner, uint256(uint160(walletAddress)));
+        bool minted = _ownerOf(uint256(uint160(walletAddress))) != address(0);
+        if (!minted) {
+            _safeMint(owner, uint256(uint160(walletAddress)));
+        }
     }
 
     function tokenURI(uint256 id) public view override returns (string memory) {
