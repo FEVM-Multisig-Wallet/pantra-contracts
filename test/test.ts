@@ -16,8 +16,8 @@ describe("Pantra Savings Contract and Savings Factory Test", function () {
   let deployer: HardhatEthersSigner;
   let feeCollector: HardhatEthersSigner;
   let walletUser: HardhatEthersSigner;
-  const depositAmount = ethers.parseEther("100");
-  const withdrawalAmount = ethers.parseEther("0.1");
+  const depositAmount = ethers.parseEther("10");
+  const withdrawalAmount = ethers.parseEther("0.5");
 
   const createHTML = (svg: string) => {
     return `
@@ -79,12 +79,12 @@ describe("Pantra Savings Contract and Savings Factory Test", function () {
     let initialCollectorBalance = await ethers.provider.getBalance(feeCollector.address);
     await savingFactory.connect(walletUser).withdraw(withdrawalAmount);
     let finalCollectorBalance = await ethers.provider.getBalance(feeCollector.address);
-    expect(parseFloat(ethers.formatEther(finalCollectorBalance)) - parseFloat(ethers.formatEther(initialCollectorBalance))).gte(0.001);
+    expect(parseFloat(ethers.formatEther(finalCollectorBalance)) - parseFloat(ethers.formatEther(initialCollectorBalance))).gte(0.0049);
     await helpers.time.increase(24*60*60*7);
     initialCollectorBalance = await ethers.provider.getBalance(feeCollector.address);
     await savingFactory.connect(walletUser).withdraw(withdrawalAmount);
     finalCollectorBalance = await ethers.provider.getBalance(feeCollector.address);
-    expect(parseFloat(ethers.formatEther(finalCollectorBalance)) - parseFloat(ethers.formatEther(initialCollectorBalance))).lt(0.000001);
+    expect(parseFloat(ethers.formatEther(finalCollectorBalance)) - parseFloat(ethers.formatEther(initialCollectorBalance))).lt(0.0000001);
   });
 
   it("Test Change Withdrawal Interval", async () => {
@@ -105,6 +105,13 @@ describe("Pantra Savings Contract and Savings Factory Test", function () {
     await (expect(savingFactory.deposit({value: depositAmount})).to.be.revertedWith("Savings Wallet not found"));
     await (expect(savingFactory.withdraw(withdrawalAmount)).to.be.revertedWith("Savings Wallet not found"));
     await (expect(savingFactory.getWalletBalance()).to.be.revertedWith("Savings Wallet not found"));
+  })
+
+  it("Multiple Desposit test", async () => {
+    const [ _deployer, _feeCollector, _walletUser ] = await ethers.getSigners();
+    await savingFactory.connect(_walletUser).deposit({value: depositAmount});
+    await savingFactory.connect(_walletUser).deposit({value: depositAmount});
+    await savingFactory.connect(_walletUser).deposit({value: depositAmount});
   })
 
   it("Test NFT SVG", async () => {

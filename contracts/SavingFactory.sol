@@ -10,7 +10,7 @@ contract PantraSavingWalletFactory {
     address public admin;
     IPantraSmartWalletNFT public walletNFT;
     mapping(address => address) public wallets;
-    mapping(address => bool) public minted;
+    mapping(address => mapping (address => bool)) public minted;
 
     constructor(address _feeCollector) {
         feeCollector = _feeCollector;
@@ -47,8 +47,9 @@ contract PantraSavingWalletFactory {
             abi.encodeWithSignature("deposit()")
         );
         require(success, "Deposit Failed");
-        if (!minted[msg.sender]) {
+        if (!minted[msg.sender][address(walletNFT)]) {
             walletNFT.mintItem(walletAddress, msg.sender);
+            minted[msg.sender][address(walletNFT)] = true;
         }
     }
 
